@@ -89,7 +89,10 @@
   font-size: 15px;
   cursor: pointer;
 }
-
+.invalid {
+  color: red;
+  transition: all 0.3 ease-in;
+}
 .arrow {
   transform: scale(1.5);
 }

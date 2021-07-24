@@ -5,20 +5,29 @@ import classes from "./Form.module.css";
 // import Fclasses from "./FormFooter.module.css";
 import FormTitle from "./FormTitle";
 const EmailField = () => {
-  const [mail, setMail] = useState(null);
+  const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+  const [invalid, setInvalid] = useState(false);
 
-  const getMail = (e) => {
-    setMail(e.target.value);
-  };
-  const getPassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const login = (e) => {
+  const login = async (e) => {
     e.preventDefault();
-    console.log(mail, password);
-    setMail("");
+    if (!email || !password) {
+      setInvalid(true);
+    }
+    const credentials = { email, password };
+
+    //USE testaccount@gmail.com FOR EMAIL
+    //USE 12345678 FOR PASSWORD
+    const user = await fetch("http://localhost:5000/users/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials),
+    });
+
+    const response = await user.json();
+    console.log(response);
+
+    setEmail("");
     setPassword("");
   };
 
@@ -32,9 +41,9 @@ const EmailField = () => {
           <input
             type="text"
             id="username"
-            value={mail}
+            value={email}
             placeholder="e.g. thomasgosalves@gmail.com"
-            onChange={getMail}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className={classes.inputContainer}>
@@ -44,7 +53,7 @@ const EmailField = () => {
             id="password"
             placeholder="Password"
             value={password}
-            onChange={getPassword}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className={classes.checkContainer}>
