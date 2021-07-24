@@ -1,0 +1,29 @@
+.container {
+  width: 60%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  /* background-color: cyan; */
+  width: 60%;
+  height: 600px;
+}
+
+.checkContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.checkContainer p {
+  font-size: 15px;
+}
+
+.check {
+  margin-right: 1rem;
+  height: 23px;
+  width: 23px;
+}
